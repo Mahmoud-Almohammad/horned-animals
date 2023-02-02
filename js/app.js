@@ -31,6 +31,14 @@ $(document).ready( function() {
         const des = $('<p></p>').text(obj.description);
         $('#content').append(des);
         des.attr('class', obj.keyword);
+
+        for(let i = 0; i < name.length; i++) {
+          const div = $('<div></div>').attr('class', 'card ' + obj.keyword);
+          div.append(name.eq(i));
+          div.append(photo.eq(i));
+          div.append(des.eq(i));
+          $('#content').append(div);
+        }
       });
 
       const spamKeywords = [];
@@ -44,16 +52,26 @@ $(document).ready( function() {
         }
       }
 
-      $('select').on('change', function() {
-        let selectedOption = $(this).val();
-        if(selectedOption === 'default'){
-          $('h2').show();
-          $('img').show();
-          $('p').show();
+      $('select').on('change', function () {
+        let $selected = $(this).val();
+        if ($selected !== 'default') {
+          $('.card').hide();
+
+          allData.forEach(image => {
+            if ($selected === image.keyword) {
+              if ($(`div`).hasClass('filtered')){
+                $('div').removeClass('filtered');
+                $(`div[class="card ${$selected}"]`).addClass('filtered').fadeIn();
+              } else {
+                $(`div[class="card ${$selected}"]`).addClass('filtered').fadeIn();
+              }
+            }
+          });
+
+          $(`option[value=${$selected}]`).fadeIn();
         } else {
-          $('h2').show().not('.' + selectedOption).hide();
-          $('img').show().not('.' + selectedOption).hide();
-          $('p').show().not('.' + selectedOption).hide();
+          $('div').removeClass('filtered').fadeIn();
+          $(`option[value=${$selected}]`).fadeIn();
         }
       });
     });
