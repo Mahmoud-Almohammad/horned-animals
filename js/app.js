@@ -17,7 +17,7 @@ $(document).ready( function() {
 
   const allData = [];
 
-  $.ajax('../data/page-1.json', ajaxSettings)
+  $.ajax('data/page-1.json', ajaxSettings)
     .then(data => {
       data.forEach(obj => {
         obj = new AnimalData(obj.image_url, obj.title, obj.description, obj.keyword, obj.horns);
