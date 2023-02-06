@@ -15,30 +15,20 @@ $(document).ready( function() {
     dataType: 'json'
   };
 
-  const allData = [];
+  let allData = [];
 
-  $.ajax('data/page-1.json', ajaxSettings)
+  $.ajax( (window.location.href.indexOf('index.html') !== -1) ? '../data/page-1.json' : '../data/page-2.json', ajaxSettings)
     .then(data => {
       data.forEach(obj => {
-        obj = new AnimalData(obj.image_url, obj.title, obj.description, obj.keyword, obj.horns);
-        allData.push(obj);
-        const name = $('<h2></h2>').text(obj.title);
-        $('#content').append(name);
-        name.attr('class', obj.keyword);
-        const photo = $('<img>').attr('src', obj.image_url);
-        $('#content').append(photo);
-        photo.attr('class', obj.keyword);
-        const des = $('<p></p>').text(obj.description);
-        $('#content').append(des);
-        des.attr('class', obj.keyword);
+        allData.push(new AnimalData(obj.image_url, obj.title, obj.description, obj.keyword, obj.horns));
 
-        for(let i = 0; i < name.length; i++) {
-          const div = $('<div></div>').attr('class', 'card ' + obj.keyword);
-          div.append(name.eq(i));
-          div.append(photo.eq(i));
-          div.append(des.eq(i));
-          $('#content').append(div);
-        }
+        let template = $('#photo-template').html();
+        let output = Mustache.render(template, obj);
+
+        const div = $('<div></div>').attr('class', 'card ' + obj.keyword);
+        $(div).append(output);
+        $('#content').append(div);
+
       });
 
       const spamKeywords = [];
