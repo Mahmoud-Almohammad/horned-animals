@@ -1,12 +1,36 @@
 
-@media screen and (min-width: 480px) and (max-width:959px) {
-    body {
-        width: 100%;
+@media screen and (max-width: 359px) {
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 90%;
+        margin: 5vh 2.5% 5vh 2.5%;
     }
 }
 
-@media screen and (min-width: 960px) {
-    body {
-        width: 100%;
+@media screen and (min-width: 360px) and (max-width:767px) {
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 45%;
+        margin: 5vh 2.5% 5vh 2.5%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 969px) {
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 25%;
+        margin: 5vh 2.5% 5vh 2.5%;
+    }
+    #content {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        row-gap: 2.5em;
     }
 }
