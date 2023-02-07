@@ -1,14 +1,15 @@
 
 #content {
-    overflow: hidden;
-    clear: both;
-    text-align: center;
-
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    row-gap: 2.5em;
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 20%;
-    height: 350px;
-    float: left;
     margin: 5vh 2.5% 5vh 2.5%;
 }
