@@ -21,14 +21,37 @@ $(document).ready( function() {
     .then(data => {
       data.forEach(obj => {
         allData.push(new AnimalData(obj.image_url, obj.title, obj.description, obj.keyword, obj.horns));
+      });
 
-        let template = $('#photo-template').html();
-        let output = Mustache.render(template, obj);
+      allData.sort( (a, b) => {
+        return a.title > b.title ? 1 : a.title < b.title ? -1 : 0;
+      });
 
-        const div = $('<div></div>').attr('class', 'card ' + obj.keyword);
-        $(div).append(output);
-        $('#content').append(div);
+      let template = $('#photo-template').html();
+      let output = Mustache.render(template, {allData: allData});
+      $('#content').append(output);
 
+      $('input').click(function() {
+        const sortBy =($('input[name="sort-by"]:checked').val());
+        const currentOption = $('select').val();
+
+        if(sortBy === 'title'){
+          $('#content > .card').remove();
+          allData.sort( (a, b) => {
+            return a.title > b.title ? 1 : a.title < b.title ? -1 : 0;
+          });
+          output = Mustache.render(template, {allData: allData});
+          $('#content').append(output);
+          $('select').val(currentOption).trigger('change');
+        } else if(sortBy === 'horns'){
+          $('#content > .card').remove();
+          allData.sort( (a, b) => {
+            return a.horns > b.horns ? 1 : a.horns < b.horns ? -1 : 0;
+          });
+          output = Mustache.render(template, {allData: allData});
+          $('#content').append(output);
+          $('select').val(currentOption).trigger('change');
+        }
       });
 
       const spamKeywords = [];
@@ -42,7 +65,9 @@ $(document).ready( function() {
         }
       }
 
-      $('select').on('change', function () {
+      $('select').on('change', renderFilter);
+
+      function renderFilter () {
         let $selected = $(this).val();
         if ($selected !== 'default') {
           $('.card').hide();
@@ -63,6 +88,7 @@ $(document).ready( function() {
           $('div').removeClass('filtered').fadeIn();
           $(`option[value=${$selected}]`).fadeIn();
         }
-      });
+      }
+
     });
 });
