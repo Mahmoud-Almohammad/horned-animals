@@ -10,6 +10,12 @@
     <header>
       <h1>The Gallery of Horns</h1>
       <a href="page2.html">Page 2</a>
+      <form id="sort-form">
+        <input type="radio" name="sort-by" value="title" checked>
+        <label for="title">Sort by title</label>
+        <input type="radio" name="sort-by" value="horns">
+        <label for="title">Sort by bumber of horns</label>
+      </form>
       <select>
         <option value="default">Filter by Keyword (all images)</option>
       </select>
@@ -17,10 +23,13 @@
     <main>
       <div id="content"></div>
       <template id="photo-template">
-        <h2 class="{{ Keyword }}">{{ title }}</h2>
-        <img class="{{ Keyword }}" src="{{ image_url }}" alt="">
-        <p class="{{ Keyword }}">{{ description }}</p>
+        {{#allData}}
+        <div class="card {{ keyword }}">
+        <h2>{{ title }}</h2>
+        <img src="{{ image_url }}" alt="">
+        <p>{{ description }}</p>
       </div>
+        {{/allData}}
       </template>
     </main>
     <footer>
