@@ -54,3 +54,24 @@ Starts at 5:00am.
 Ends at 7:30am.
 
 Actual time needed to complete: 2 hours and a half.
+
+## Feature 3: Styling with Flexbox
+
+Estimate of time needed to complete: 2 hours.
+
+Starts at 4:00am.
+
+Ends at 6:30am.
+
+Actual time needed to complete: 2 hours and a half.
+
+## Feature 4: Pagination
+
+Estimate of time needed to complete: 3 hours.
+
+Starts at 2:00am.
+
+Ends at 8:30am.
+
+Actual time needed to complete: 6 hours and a half.
+
